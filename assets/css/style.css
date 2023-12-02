@@ -34,4 +34,11 @@ h1 {
     min-height: 100px;
     width: 80%;
     margin: 10px auto;
+    padding: 2%;
+}
+#currentWeather h2 {
+    margin-bottom: 2%;
+}
+#currentWeather p {
+    margin-bottom: 1%;
 }

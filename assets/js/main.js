@@ -31,10 +31,10 @@ const currentWeatherFxn = (city, temp, wind, humid) => {
     const newWind = document.createElement("p");
     const newHumid = document.createElement("p");
     
-    newHead.textContent = city; 
-    newTemp.textContent = temp; 
-    newWind.textContent = wind; 
-    newHumid.textContent = humid; 
+    newHead.textContent = `${city}`; 
+    newTemp.textContent = `Temp: ${temp} deg F`; 
+    newWind.textContent = `Wind: ${wind} MPH`;
+    newHumid.textContent = `Humidity: ${humid} %`; 
 
     currentWeatherDiv.append(newHead);
     currentWeatherDiv.append(newTemp);
