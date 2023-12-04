@@ -2,6 +2,7 @@ console.log("I work");
 // DOM variables
 const currentWeatherDiv = document.querySelector("#currentWeather");
 const today = document.querySelector('#today');
+const forecastP = document.querySelectorAll('.forecastWeather');
 // other variables
 // accsess token for account jeff777AtUCB using jdnelson@berkeley.edu
 const apiKey = '3c174ae84960a3091b2facf671fb569b';
@@ -90,5 +91,21 @@ const currentWeatherFxn = (city, temp, wind, humid) => {
 // currentWeatherFxn("San Francisco", 47, 5, 95);
 // weather forcast fxn
 const forecastWeatherFxn = (dataArr) => {
-console.log(dataArr);
+    console.log(dataArr);
+    for(let i = 0; i < 5; i++) {
+        const subDate = document.createElement("p");
+        const subTemp = document.createElement("p");
+        const subWind = document.createElement("p");
+        const subHumid = document.createElement("p");
+        // let forecastBox = `forecastP[${i}]`;
+        subDate.textContent = `${dayjs(dataArr[i * 8 + 7].dt_txt).format('(M/D/YYYY)')}`;
+        subTemp.textContent = `Temp: ${Math.round((dataArr[i * 8 + 7].main.temp - 273.15) * 1.8 + 32)} deg F`;
+        subWind.textContent = `Wind: ${Math.round(dataArr[i * 8 + 7].wind.speed)} MPH`;
+        subHumid.textContent = `Humidity: ${Math.round(dataArr[i * 8 + 7].main.humidity)} %`;
+
+        forecastP[i].append(subDate);
+        forecastP[i].append(subTemp);
+        forecastP[i].append(subWind);
+        forecastP[i].append(subHumid);
+    }
 }

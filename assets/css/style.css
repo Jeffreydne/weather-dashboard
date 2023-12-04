@@ -43,3 +43,18 @@ h1 {
 #currentWeather p {
     margin-bottom: 1%;
 }
+#forecastWeatherDiv {
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+    margin: 10px auto;
+}
+.forecastWeather {
+    background-color: #3C459C;
+    color: #fff;
+    min-width: 170px;
+    height: 100px;
+    margin: 1%;
+    padding: 1%;
+    line-height: 1.3;
+}
