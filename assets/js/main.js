@@ -5,6 +5,7 @@ const today = document.querySelector('#today');
 const forecastP = document.querySelectorAll('.forecastWeather');
 const cityInput = document.querySelector('#cityName');
 const submitBtn = document.querySelector('#submitBtn');
+const cityDiv = document.querySelector('#cityList');
 // other variables
 // accsess token for account jeff777AtUCB using jdnelson@berkeley.edu
 const apiKey = '3c174ae84960a3091b2facf671fb569b';
@@ -145,7 +146,41 @@ const forecastWeatherFxn = (dataArr) => {
         forecastP[i].append(subHumid);
     }
 }
+// function to get all city names previously selected by user and th edisplay the most recent 10 in the DOM
+let displayPreviousCities = () => {
+    if(!localStorage.cityArr) {
+        return;
+    } 
+    arrToPost = JSON.parse(localStorage.getItem('cityArr'));   
+    if (arrToPost.length > 9) {
+  
+        for(let i = arrToPost.length - 1; i > arrToPost.length - 10; i--) {
+            const newCity = document.createElement('h3');
+            newCity.textContent = `${arrToPost[i].cityName}`;
+            cityDiv.append(newCity);
+        }
+    } else {
+        // arrToPost = JSON.parse(localStorage.getItem('cityArr'));
+        for(let j = arrToPost.length - 1; j > -1; j--) {
+            const newCity = document.createElement('h3');
+            newCity.textContent = `${arrToPost[j].cityName}`;
+            cityDiv.append(newCity);
+        }
+    }
+}
+// function to store city name in local storage & display it in DOM
+const storeCityName = (cityToStore) => {
+    let storageObj = {
+        cityName: `${cityToStore}`
+    }
 
+    const existingCityArr = JSON.parse(localStorage.getItem('cityArr')) || [];
+
+    const newCityArr = [...existingCityArr, storageObj];
+    localStorage.setItem('cityArr', JSON.stringify(newCityArr));
+    displayPreviousCities();
+    console.log(newCityArr);
+}
 //event listener for submit
 submitBtn.addEventListener('click', function (event) {
     event.preventDefault();
@@ -154,4 +189,5 @@ submitBtn.addEventListener('click', function (event) {
     cityInput.value = '';
     weatherRequestUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
     getWeatherFxn();
+    storeCityName(city);
   });
