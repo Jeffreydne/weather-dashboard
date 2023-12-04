@@ -45,7 +45,7 @@ XXXXXXXXXXXXXXXXX
 This webstie is designed to help a user easily find the current weather, as well as a 5 day forecast in a city of their choosing. Once they have searched for weather in a city, that city's data will be cached and that city will be presented to the user in the future so they won't have to search again. 
 
 
-![ alt text](./assets/images/weather-dashboard-screenshot.png)
+![ alt text](./assets/img/weather-dashboard-screenshot.png)
 ---
 
 ## Learning Points
