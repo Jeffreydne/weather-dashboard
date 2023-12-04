@@ -3,6 +3,8 @@ console.log("I work");
 const currentWeatherDiv = document.querySelector("#currentWeather");
 const today = document.querySelector('#today');
 const forecastP = document.querySelectorAll('.forecastWeather');
+const cityInput = document.querySelector('#cityName');
+const submitBtn = document.querySelector('#submitBtn');
 // other variables
 // accsess token for account jeff777AtUCB using jdnelson@berkeley.edu
 const apiKey = '3c174ae84960a3091b2facf671fb569b';
@@ -33,36 +35,38 @@ let forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=37.7749&
 let weatherRequestUrl = `https://api.openweathermap.org/data/2.5/weather?q=San Francisco,ca,us&appid=${apiKey}`
 
 // fetches to api.openweathermap.org
-// first to get current weather
-fetch(weatherRequestUrl)
-.then(function (response) {
-  return response.json();
-})
-.then(function (data) {
-    let cityData = data.name;
-    let cityTemp =data.main.temp;
-    let cityWind = data.wind.speed;
-    let cityHumid = data.main.humidity;
-    let cityLon = data.coord.lon;
-    let cityLat = data.coord.lat;
-    let cityWeather = data.weather[0].main;
-  console.log(cityData, cityTemp, cityWind, cityHumid, cityWeather);
-  console.log(cityLon, cityLat);
-  console.log(data);
-  currentWeatherFxn(cityData, cityTemp, cityWind, cityHumid, cityWeather);
-  forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${cityLat}&lon=${cityLon}&appid=5501ff385f19fde5b8b984f2550fcae3`;
+// function getWeather first fetch is to get current weather for indicated city and add that to DOM then within this will do 2nd fetch using the obtained longitude and latitude to also fetch 5 day forecast for indicated city and put into DOM
+const getWeatherFxn = () => {
+    fetch(weatherRequestUrl)
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (data) {
+        let cityData = data.name;
+        let cityTemp =data.main.temp;
+        let cityWind = data.wind.speed;
+        let cityHumid = data.main.humidity;
+        let cityLon = data.coord.lon;
+        let cityLat = data.coord.lat;
+        let cityWeather = data.weather[0].main;
+        console.log(cityData, cityTemp, cityWind, cityHumid, cityWeather);
+        console.log(cityLon, cityLat);
+        console.log(data);
+        currentWeatherFxn(cityData, cityTemp, cityWind, cityHumid, cityWeather);
+        forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${cityLat}&lon=${cityLon}&appid=5501ff385f19fde5b8b984f2550fcae3`;
 
-  fetch(forecastUrl)
-.then(function (response) {
-  return response.json();
-})
-.then(function (data) {
-    console.log(data);
-    forecastWeatherFxn(data.list);
-});
-});
+        fetch(forecastUrl)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data);
+            forecastWeatherFxn(data.list);
+        });
+    });
+}
 // fetch to get forecast weather
-
+getWeatherFxn();
 // fetch(forecastUrl)
 // .then(function (response) {
 //   return response.json();
@@ -72,6 +76,8 @@ fetch(weatherRequestUrl)
 // });
 //functions
 const currentWeatherFxn = (city, temp, wind, humid, icon) => {
+    // clear current contents
+    currentWeatherDiv.textContent = '';
     const newHead = document.createElement("h2");
     const newTemp = document.createElement("p");
     const newWind = document.createElement("p");
@@ -107,6 +113,7 @@ const currentWeatherFxn = (city, temp, wind, humid, icon) => {
 const forecastWeatherFxn = (dataArr) => {
     console.log(dataArr);
     for(let i = 0; i < 5; i++) {
+        forecastP[i].textContent = '';
         const subDate = document.createElement("p");
         const subTemp = document.createElement("p");
         const subWind = document.createElement("p");
@@ -138,3 +145,13 @@ const forecastWeatherFxn = (dataArr) => {
         forecastP[i].append(subHumid);
     }
 }
+
+//event listener for submit
+submitBtn.addEventListener('click', function (event) {
+    event.preventDefault();
+    city = cityInput.value;
+    console.log(city);
+    cityInput.value = '';
+    weatherRequestUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
+    getWeatherFxn();
+  });
