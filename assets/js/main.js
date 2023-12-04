@@ -154,7 +154,7 @@ let displayPreviousCities = () => {
     arrToPost = JSON.parse(localStorage.getItem('cityArr'));   
     if (arrToPost.length > 9) {
   
-        for(let i = arrToPost.length - 1; i > arrToPost.length - 10; i--) {
+        for(let i = arrToPost.length - 1; i > arrToPost.length - 11; i--) {
             const newCity = document.createElement('h3');
             newCity.textContent = `${arrToPost[i].cityName}`;
             cityDiv.append(newCity);
@@ -181,6 +181,8 @@ const storeCityName = (cityToStore) => {
     displayPreviousCities();
     console.log(newCityArr);
 }
+// get any stored cities on load of document
+displayPreviousCities();
 //event listener for submit
 submitBtn.addEventListener('click', function (event) {
     event.preventDefault();

@@ -26,12 +26,21 @@ header {
     background-color: #3C459C;
     padding: 3%;
 }
+main {
+    display: flex;
+    /* justify-content: flex-start;
+    align-items: flex-start; */
+}
 h1 {
     text-align: center;
 }
 aside {
     padding: 1%;
     margin: 1%;
+    flex: 1 1 20%;
+}
+section {
+    flex: 3 1 75%;
 }
 
 #currentWeather {
