@@ -51,16 +51,25 @@ fetch(weatherRequestUrl)
   console.log(cityData, cityTemp, cityWind, cityHumid);
   console.log(cityLon, cityLat);
   currentWeatherFxn(cityData, cityTemp, cityWind, cityHumid);
-});
-// fetch to get forecast weather
+  forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${cityLat}&lon=${cityLon}&appid=5501ff385f19fde5b8b984f2550fcae3`;
 
-fetch(forecastUrl)
+  fetch(forecastUrl)
 .then(function (response) {
   return response.json();
 })
 .then(function (data) {
-    console.log(data);
+    forecastWeatherFxn(data.list);
 });
+});
+// fetch to get forecast weather
+
+// fetch(forecastUrl)
+// .then(function (response) {
+//   return response.json();
+// })
+// .then(function (data) {
+//     console.log(data);
+// });
 //functions
 const currentWeatherFxn = (city, temp, wind, humid) => {
     const newHead = document.createElement("h2");
@@ -79,3 +88,7 @@ const currentWeatherFxn = (city, temp, wind, humid) => {
     currentWeatherDiv.append(newHumid);
 }
 // currentWeatherFxn("San Francisco", 47, 5, 95);
+// weather forcast fxn
+const forecastWeatherFxn = (dataArr) => {
+console.log(dataArr);
+}
