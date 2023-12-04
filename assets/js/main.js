@@ -9,8 +9,8 @@ const apiKey = '3c174ae84960a3091b2facf671fb569b';
 let city;
 let now = dayjs();
 console.log(now);
+// get & format today's date and add it to header
 let dateToday = now.format('(M/D/YYYY)');
-// the &#x2600; is symbol for sun emoji. Need to figure out clouds, rain etc and move it to current weather and forecast divs
 today.innerHTML = dateToday;
 
 
@@ -22,7 +22,7 @@ today.innerHTML = dateToday;
 // let forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=44.34&lon=10.99&appid=5501ff385f19fde5b8b984f2550fcae3`
 
 
-let forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=37.7749&lon=-122.4194&appid=5501ff385f19fde5b8b984f2550fcae3`
+let forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=37.7749&lon=-122.4194&appid=${apiKey}`
 // appid=5501ff385f19fde5b8b984f2550fcae3
 
 //currentWeather API format
@@ -30,11 +30,7 @@ let forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=37.7749&
 
 // let weatherRequestUrl = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent('San Francisco')},CA,US&appid=3c174ae84960a3091b2facf671fb569b`;
 
-let weatherRequestUrl = `https://api.openweathermap.org/data/2.5/weather?q=San Francisco,ca,us&appid=5501ff385f19fde5b8b984f2550fcae3`
-
-// appid=3c174ae84960a3091b2facf671fb569b
-
-// let weatherRequestUrl = `https://api.openweathermap.org/data/2.5/weather?q=Sacramento,ca,us&appid=3c174ae84960a3091b2facf671fb569b`;
+let weatherRequestUrl = `https://api.openweathermap.org/data/2.5/weather?q=San Francisco,ca,us&appid=${apiKey}`
 
 // fetches to api.openweathermap.org
 // first to get current weather
