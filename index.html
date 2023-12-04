@@ -14,7 +14,7 @@
     <aside>
         <form>
             <h2>Click on a city name to get the weather for that city. Or Submit a new city:</h2>
-            <input type="text" id="cityName" name="cityName" required maxlength="30" />
+            <input type="text" id="cityName" name="cityName" required maxlength="30" placeholder="Your City" />
             <button type="submit" id="submitBtn">Submit</button>
         </form>
         <div id="cityList">
@@ -23,6 +23,7 @@
     </aside>
     <section>
         <div id="currentWeather"></div>
+        <h2>5-day Forecast: </h2>
         <div id="forecastWeatherDiv">
             <div class="forecastWeather" id="fw0"></div>
             <div class="forecastWeather" id="fw1"></div>

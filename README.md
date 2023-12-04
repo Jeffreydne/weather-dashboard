@@ -42,9 +42,9 @@ XXXXXXXXXXXXXXXXX
 ```
 ## Usage
 
-This webstie is designed to help a user easily find the current weather, as well as a 5 day forecast in a city of thier choosing. Once they have searched for weather in a city, that cities data will be cached and that city will be presented to the user in the future so they won't have to search again. 
+This webstie is designed to help a user easily find the current weather, as well as a 5 day forecast in a city of their choosing. Once they have searched for weather in a city, that city's data will be cached and that city will be presented to the user in the future so they won't have to search again. 
 
-XXXXXXXXXXXXXX- the below screenshot needs to be taken and stored in the assets/img folder
+
 ![ alt text](./assets/images/weather-dashboard-screenshot.png)
 ---
 

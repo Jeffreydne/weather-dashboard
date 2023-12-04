@@ -80,6 +80,7 @@ const currentWeatherFxn = (city, temp, wind, humid, icon) => {
     // clear current contents
     currentWeatherDiv.textContent = '';
     const newHead = document.createElement("h2");
+    const h4 = document.createElement('h4');
     const newTemp = document.createElement("p");
     const newWind = document.createElement("p");
     const newHumid = document.createElement("p");
@@ -100,6 +101,7 @@ const currentWeatherFxn = (city, temp, wind, humid, icon) => {
     }
     // set paragraph content for current weather
     newHead.textContent = `${city} ${dateToday} ${iconKey}`; 
+    h4.textContent = `Current Weather:`;
     newTemp.textContent = `Temp: ${Math.round((temp - 273.15) * 1.8 + 32)} deg F`; 
     newWind.textContent = `Wind: ${Math.round(wind)} MPH`;
     newHumid.textContent = `Humidity: ${Math.round(humid)} %`; 
@@ -116,6 +118,7 @@ const forecastWeatherFxn = (dataArr) => {
     for(let i = 0; i < 5; i++) {
         forecastP[i].textContent = '';
         const subDate = document.createElement("p");
+        const subIcon = document.createElement("p");
         const subTemp = document.createElement("p");
         const subWind = document.createElement("p");
         const subHumid = document.createElement("p");
@@ -135,12 +138,14 @@ const forecastWeatherFxn = (dataArr) => {
                 iconKey = "🌧️";
         }
         // add content to each paragraph
-        subDate.textContent = `${dayjs(dataArr[i * 8 + 7].dt_txt).format('(M/D/YYYY)')} ${iconKey}`;
+        subDate.textContent = `${dayjs(dataArr[i * 8 + 7].dt_txt).format('(M/D/YYYY)')}`;
+        subIcon.textContent = `${iconKey}`;
         subTemp.textContent = `Temp: ${Math.round((dataArr[i * 8 + 7].main.temp - 273.15) * 1.8 + 32)} deg F`;
         subWind.textContent = `Wind: ${Math.round(dataArr[i * 8 + 7].wind.speed)} MPH`;
         subHumid.textContent = `Humidity: ${Math.round(dataArr[i * 8 + 7].main.humidity)} %`;
 
         forecastP[i].append(subDate);
+        forecastP[i].append(subIcon);
         forecastP[i].append(subTemp);
         forecastP[i].append(subWind);
         forecastP[i].append(subHumid);
