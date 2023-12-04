@@ -97,8 +97,23 @@ const forecastWeatherFxn = (dataArr) => {
         const subTemp = document.createElement("p");
         const subWind = document.createElement("p");
         const subHumid = document.createElement("p");
-        // let forecastBox = `forecastP[${i}]`;
-        subDate.textContent = `${dayjs(dataArr[i * 8 + 7].dt_txt).format('(M/D/YYYY)')}`;
+        // select icon to reflect actual weather
+        let iconKey;
+        switch (dataArr[i * 8 + 7].weather[0].main) {      
+            case "Clear":
+                iconKey = "🌞";
+                break; 
+            case "Clouds":
+                iconKey = "🌥️";
+                break;
+            case "Snow":
+                iconKey = "❄️";
+                break;
+            default:
+                iconKey = "🌧️";
+        }
+        // add content to each paragraph
+        subDate.textContent = `${dayjs(dataArr[i * 8 + 7].dt_txt).format('(M/D/YYYY)')} ${iconKey}`;
         subTemp.textContent = `Temp: ${Math.round((dataArr[i * 8 + 7].main.temp - 273.15) * 1.8 + 32)} deg F`;
         subWind.textContent = `Wind: ${Math.round(dataArr[i * 8 + 7].wind.speed)} MPH`;
         subHumid.textContent = `Humidity: ${Math.round(dataArr[i * 8 + 7].main.humidity)} %`;
