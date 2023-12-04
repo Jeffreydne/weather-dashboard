@@ -24,6 +24,7 @@ input, select, option, textarea, button {
 header {
     color: #fff;
     background-color: #3C459C;
+    padding: 3%;
 }
 h1 {
     text-align: center;
