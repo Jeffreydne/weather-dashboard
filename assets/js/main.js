@@ -11,7 +11,7 @@ let now = dayjs();
 console.log(now);
 let dateToday = now.format('(M/D/YYYY)');
 // the &#x2600; is symbol for sun emoji. Need to figure out clouds, rain etc and move it to current weather and forecast divs
-today.innerHTML = dateToday + " &#x2600;";
+today.innerHTML = dateToday;
 
 
 // API variables
@@ -49,9 +49,11 @@ fetch(weatherRequestUrl)
     let cityHumid = data.main.humidity;
     let cityLon = data.coord.lon;
     let cityLat = data.coord.lat;
-  console.log(cityData, cityTemp, cityWind, cityHumid);
+    let cityWeather = data.weather[0].main;
+  console.log(cityData, cityTemp, cityWind, cityHumid, cityWeather);
   console.log(cityLon, cityLat);
-  currentWeatherFxn(cityData, cityTemp, cityWind, cityHumid);
+  console.log(data);
+  currentWeatherFxn(cityData, cityTemp, cityWind, cityHumid, cityWeather);
   forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${cityLat}&lon=${cityLon}&appid=5501ff385f19fde5b8b984f2550fcae3`;
 
   fetch(forecastUrl)
@@ -59,6 +61,7 @@ fetch(weatherRequestUrl)
   return response.json();
 })
 .then(function (data) {
+    console.log(data);
     forecastWeatherFxn(data.list);
 });
 });
@@ -69,16 +72,31 @@ fetch(weatherRequestUrl)
 //   return response.json();
 // })
 // .then(function (data) {
-//     console.log(data);
+    // console.log(data);
 // });
 //functions
-const currentWeatherFxn = (city, temp, wind, humid) => {
+const currentWeatherFxn = (city, temp, wind, humid, icon) => {
     const newHead = document.createElement("h2");
     const newTemp = document.createElement("p");
     const newWind = document.createElement("p");
     const newHumid = document.createElement("p");
-    
-    newHead.textContent = `${city} ${dateToday}`; 
+    // set icon to reflect actual weather
+    let iconKey;
+    switch (icon) {      
+        case "Clear":
+            iconKey = "🌞";
+            break; 
+        case "Clouds":
+            iconKey = "🌥️";
+            break;
+        case "Snow":
+            iconKey = "❄️";
+            break;
+        default:
+            iconKey = "🌧️";
+    }
+    // set paragraph content for current weather
+    newHead.textContent = `${city} ${dateToday} ${iconKey}`; 
     newTemp.textContent = `Temp: ${Math.round((temp - 273.15) * 1.8 + 32)} deg F`; 
     newWind.textContent = `Wind: ${Math.round(wind)} MPH`;
     newHumid.textContent = `Humidity: ${Math.round(humid)} %`; 
