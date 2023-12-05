@@ -179,7 +179,7 @@ const storeCityName = (cityToStore) => {
         cityName: `${cityToStore}`
     }
 
-    const existingCityArr = JSON.parse(localStorage.getItem('cityArr')) || [];
+    const existingCityArr = JSON.parse(localStorage.getItem('cityArr')) || [{"cityName" : "San Francisco"}];
     for(let i = 0; i < existingCityArr.length; i++) {
         if(cityToStore === existingCityArr[i].cityName) {
             return;
@@ -187,6 +187,7 @@ const storeCityName = (cityToStore) => {
     }
     const newCityArr = [...existingCityArr, storageObj];
     localStorage.setItem('cityArr', JSON.stringify(newCityArr));
+    cityDiv.innerHTML = "";
     displayPreviousCities();
     console.log(newCityArr);
 }
