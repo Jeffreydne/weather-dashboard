@@ -11,7 +11,6 @@ const cityDiv = document.querySelector('#cityList');
 const apiKey = '3c174ae84960a3091b2facf671fb569b';
 let city;
 let now = dayjs();
-console.log(now);
 // get & format today's date and add it to header
 let dateToday = now.format('(M/D/YYYY)');
 today.innerHTML = dateToday;
@@ -50,7 +49,7 @@ const getWeatherFxn = () => {
         //call currentWeatherFxn to load current weather data obtained from api into DOM
         currentWeatherFxn(cityData, cityTemp, cityWind, cityHumid, cityWeather);
         // set new forcast URL using the latitude and longitude of chosen city (which is provided in data object of that city). This info is required for fetch of forecast data 
-        forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${cityLat}&lon=${cityLon}&appid=5501ff385f19fde5b8b984f2550fcae3`;
+        forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${cityLat}&lon=${cityLon}&appid=${apiKey}`;
         // using new forecastUrl fetch forecast data of chosen (or default) city. This is part of getWeatherFxn so that 5-day forecast is always of same city as current weather
         fetch(forecastUrl)
         .then(function (response) {
