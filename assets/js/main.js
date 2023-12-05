@@ -1,6 +1,7 @@
 // DOM variables
 const currentWeatherDiv = document.querySelector("#currentWeather");
 const today = document.querySelector('#today');
+// forecastP is an array of the 5 divs that will contain each of the 5 days of the 5-day forecast
 const forecastP = document.querySelectorAll('.forecastWeather');
 const cityInput = document.querySelector('#cityName');
 const submitBtn = document.querySelector('#submitBtn');

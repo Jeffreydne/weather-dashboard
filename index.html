@@ -8,22 +8,28 @@
 </head>
 <body>
  <header>
+    <!-- span for today's date to be added dynamically by js -->
     <h1>Weather Dashboard <span id="today"></span></h1>
  </header>
+ <!-- Main has 2 children, an aside and a section. CSS display flex property used to align these 2 elements -->
  <main>
     <aside>
+        <!-- form used for city name input -->
         <form>
             <h2>Click on a city name to get the weather for that city. Or Submit a new city:</h2>
             <input type="text" id="cityName" name="cityName" required maxlength="30" placeholder="Your City" />
             <button type="submit" id="submitBtn">Submit</button>
         </form>
+        <!-- div #cityList will dynamically display all cities previously chosen by user, as well as SF. Initial default city in DOM is San Francisco -->
         <div id="cityList">
             <h3>San Francisco</h3>
         </div>
     </aside>
     <section>
+        <!-- div to display current weather of chosen (or default) city -->
         <div id="currentWeather"></div>
         <h2>5-day Forecast: </h2>
+              <!-- div to display forecast weather of chosen (or default) city. Each div inside #forecastWeatherDiv will have a class (.forecastWeather) and these 5 divs are stored in an array using querySelectorAll in js -->
         <div id="forecastWeatherDiv">
             <div class="forecastWeather" id="fw0"></div>
             <div class="forecastWeather" id="fw1"></div>
