@@ -28,8 +28,6 @@ header {
 }
 main {
     display: flex;
-    /* justify-content: flex-start;
-    align-items: flex-start; */
 }
 h1 {
     text-align: center;
@@ -51,9 +49,7 @@ form h2, button, input {
     width: 100%;
     padding: 3%;
 }
-/* form {
-    padding: 3%;
-} */
+
 #submitBtn {
     width: 100%;
     margin: 1% auto;
@@ -72,6 +68,10 @@ form h2, button, input {
 }
 #currentWeather h2 {
     margin-bottom: 2%;
+}
+#currentWeather h4 {
+    margin-bottom: 1%;
+    text-decoration: underline;
 }
 #currentWeather p {
     margin-bottom: 1%;
