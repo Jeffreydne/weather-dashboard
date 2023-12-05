@@ -188,7 +188,7 @@ const storeCityName = (cityToStore) => {
 }
 // get any stored cities on load of document
 displayPreviousCities();
-//event listener for submit
+//event listener for submit button 
 submitBtn.addEventListener('click', function (event) {
     event.preventDefault();
     city = cityInput.value;
@@ -198,3 +198,10 @@ submitBtn.addEventListener('click', function (event) {
     getWeatherFxn();
     storeCityName(city);
   });
+// event listener for stored cities
+cityDiv.addEventListener("click", (event) => {
+    event.preventDefault;
+    city = event.target.innerText;
+    weatherRequestUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
+    getWeatherFxn(); 
+})
