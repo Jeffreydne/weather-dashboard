@@ -180,25 +180,29 @@ const storeCityName = (cityToStore) => {
     }
 
     const existingCityArr = JSON.parse(localStorage.getItem('cityArr')) || [];
-
+    for(let i = 0; i < existingCityArr.length; i++) {
+        if(cityToStore === existingCityArr[i].cityName) {
+            return;
+        }
+    }
     const newCityArr = [...existingCityArr, storageObj];
     localStorage.setItem('cityArr', JSON.stringify(newCityArr));
     displayPreviousCities();
     console.log(newCityArr);
 }
-// get any stored cities on load of document
+// fxn to get any city names in local storage. The fxn is called here to add them to the DOM on load of document
 displayPreviousCities();
-//event listener for submit button 
+// Event Listeners
+//event listener for submit button. On submit the value inside the text input will be stored in the variable city, the text input will be cleared, the weather request URL will be made to include the city name, then 2 functions are called. FIrst getWeatherFxn() will put the indicated cities weather info into DOM using fxn above and second storeCityName() will add the indicated city into localStorage 
 submitBtn.addEventListener('click', function (event) {
     event.preventDefault();
     city = cityInput.value;
-    console.log(city);
     cityInput.value = '';
     weatherRequestUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
     getWeatherFxn();
     storeCityName(city);
   });
-// event listener for stored cities
+// event listener for stored cities. Uses event delegation to listen for any event in #cityList div. When a city h3 is clicked on, the innerText of that element will be added to city variable and then getWeatherFxn is called to display weather info for that city
 cityDiv.addEventListener("click", (event) => {
     event.preventDefault;
     city = event.target.innerText;
